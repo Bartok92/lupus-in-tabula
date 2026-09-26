@@ -1,5 +1,7 @@
 # Lupus in Tabula – app da cellulare
 
+**👉 Gioca: https://bartok92.github.io/lupus-in-tabula/**
+
 App per giocare a Lupus in Tabula con i telefoni: il **Master** crea la partita, gli amici **scansionano il QR** e giocano ciascuno dal proprio telefono. Regole e varianti: [RULES.md](RULES.md).
 
 ## Come si gioca a casa di amici
