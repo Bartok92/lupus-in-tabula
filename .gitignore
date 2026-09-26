@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+*.sqlite
+*.sqlite-journal
+data/
+certs/
+.env
+playwright-report/
+test-results/
+.claude/
+*.log

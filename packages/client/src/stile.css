@@ -1,0 +1,239 @@
+@import 'tailwindcss';
+/* Font inclusi nel pacchetto (funzionano offline). */
+@import '@fontsource/cinzel-decorative/latin-700.css';
+@import '@fontsource/cinzel/latin-600.css';
+@import '@fontsource/cinzel/latin-700.css';
+@import '@fontsource/eb-garamond/latin-400.css';
+@import '@fontsource/eb-garamond/latin-400-italic.css';
+@import '@fontsource/eb-garamond/latin-600.css';
+
+/* ——— Token fissi ——— */
+@theme {
+  --font-titolo: 'Cinzel Decorative', 'Cinzel', Georgia, serif;
+  --font-maiuscolo: 'Cinzel', Georgia, serif;
+  --font-testo: 'EB Garamond', Georgia, serif;
+
+  --color-notte-950: #05070f;
+  --color-notte-900: #070a18;
+  --color-notte-800: #0b1026;
+  --color-notte-700: #141b3d;
+  --color-notte-600: #1f2a5c;
+  --color-luna: #e4e8f2;
+  --color-argento: #aeb7cc;
+  --color-pergamena: #efe3c4;
+  --color-pergamena-scura: #d8c595;
+  --color-inchiostro: #2a1c0d;
+  --color-ocra: #c08a2e;
+  --color-legno: #5b3a1e;
+  --color-sangue: #9e1b1b;
+  --color-sangue-chiaro: #e67a7a;
+  --color-oro: #d4af37;
+  --color-oro-chiaro: #f0d47a;
+
+  /* alias usati dalle schermate provvisorie della milestone 3 */
+  --color-notte: #0b1026;
+  --color-notte-profonda: #05070f;
+}
+
+/* ——— Token che cambiano fra notte e giorno ——— */
+@theme inline {
+  --color-sfondo: var(--sfondo);
+  --color-superficie: var(--superficie);
+  --color-superficie-forte: var(--superficie-forte);
+  --color-testo: var(--testo);
+  --color-testo-tenue: var(--testo-tenue);
+  --color-bordo: var(--bordo);
+  --color-accento: var(--accento);
+  --color-pericolo: var(--pericolo);
+  --color-riga: var(--riga);
+  --color-criceto: var(--criceto);
+}
+
+:root,
+[data-tema='notte'] {
+  --sfondo: #070a18;
+  --superficie: rgb(16 22 52 / 0.78);
+  --superficie-forte: #141b3d;
+  --testo: #e4e8f2;
+  --testo-tenue: #b3bcd0;
+  --bordo: rgb(212 175 55 / 0.35);
+  --accento: #d4af37;
+  --pericolo: #e67a7a;
+  --riga: rgb(7 10 24 / 0.8);
+  --criceto: #c9a7ff;
+  color-scheme: dark;
+}
+
+[data-tema='giorno'] {
+  --sfondo: #e9dcb8;
+  --superficie: rgb(245 236 212 / 0.88);
+  --superficie-forte: #efe3c4;
+  --testo: #2a1c0d;
+  --testo-tenue: #5b4630;
+  --bordo: rgb(91 58 30 / 0.4);
+  --accento: #8a5a12;
+  --pericolo: #9e1b1b;
+  --riga: rgb(250 243 225 / 0.85);
+  --criceto: #6b3fb8;
+  color-scheme: light;
+}
+
+/* ——— Base ——— */
+html {
+  background: var(--sfondo);
+  color: var(--testo);
+  font-family: var(--font-testo);
+  font-size: 18px;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  overscroll-behavior: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accento);
+  outline-offset: 2px;
+}
+
+/* ——— Atmosfera ——— */
+@keyframes scintilla {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+@keyframes nebbia {
+  from { transform: translateX(-12%); }
+  to { transform: translateX(12%); }
+}
+@keyframes pulsa {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+@keyframes fiammella {
+  0%, 100% { opacity: 0.85; }
+  40% { opacity: 1; }
+  60% { opacity: 0.7; }
+}
+
+.stella-viva { animation: scintilla 3.5s ease-in-out infinite; }
+.pulsa {
+  animation: pulsa 2.2s ease-in-out infinite;
+  /* negli SVG la trasformazione deve partire dal centro della forma */
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fiammella { animation: fiammella 1.6s ease-in-out infinite; }
+
+.nebbia {
+  position: absolute;
+  left: -20%;
+  width: 140%;
+  height: 32%;
+  background: radial-gradient(ellipse at center, rgb(200 210 235 / 0.1), transparent 65%);
+  filter: blur(8px);
+  animation: nebbia 38s ease-in-out infinite alternate;
+}
+
+.vignetta {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, transparent 55%, rgb(0 0 0 / 0.55) 100%);
+}
+
+.grana {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ——— Carta 3D ——— */
+.carta-scena { perspective: 1200px; }
+.carta-interno {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+.carta-interno.girata { transform: rotateY(180deg); }
+.carta-faccia {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.carta-fronte { transform: rotateY(180deg); }
+
+/* ——— Pergamena ——— */
+.pergamena {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgb(255 255 255 / 0.35), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgb(120 80 30 / 0.18), transparent 55%),
+    linear-gradient(180deg, #f4e9cc, #e8d6a8);
+  color: var(--color-inchiostro);
+  box-shadow: inset 0 0 28px rgb(120 80 30 / 0.35), 0 10px 30px rgb(0 0 0 / 0.45);
+}
+.pergamena-rotolo {
+  height: 16px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #b89a5e, #f1e2bb 45%, #a8864a);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 0.35);
+}
+
+/* ——— Cielo: transizione notte ↔ giorno ——— */
+.cielo-strato { transition: opacity 2.6s ease-in-out; }
+.astro { transition: transform 2.6s cubic-bezier(0.45, 0, 0.3, 1), opacity 2.6s ease; transform-box: view-box; }
+.villaggio-sagoma { transition: fill 2.6s ease; }
+.villaggio-finestre { transition: opacity 2s ease; }
+
+/* ——— Momenti a effetto ——— */
+@keyframes srotola {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.srotola { animation: srotola 1.4s cubic-bezier(0.3, 0.7, 0.3, 1) both; }
+
+@keyframes compari {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.compari { animation: compari 0.7s ease both; }
+
+@keyframes fiamma {
+  0%, 100% { transform: scaleY(1) skewX(0deg); }
+  25% { transform: scaleY(1.08) skewX(2deg); }
+  50% { transform: scaleY(0.94) skewX(-2deg); }
+  75% { transform: scaleY(1.05) skewX(1deg); }
+}
+.fiamma { animation: fiamma 0.9s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
+
+@keyframes oscilla {
+  0%, 100% { transform: rotate(-14deg); }
+  50% { transform: rotate(14deg); }
+}
+.oscilla { animation: oscilla 1.3s ease-in-out infinite; transform-origin: 50% 0; transform-box: fill-box; }
+
+@keyframes saltella {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-14px) rotate(-6deg); }
+  60% { transform: translateY(0) rotate(4deg); }
+}
+.saltella { animation: saltella 1.1s ease-in-out infinite; }
+
+@keyframes alone {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.8; }
+}
+.alone { animation: alone 3s ease-in-out infinite; }
+
+/* Movimento ridotto: niente animazioni decorative. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

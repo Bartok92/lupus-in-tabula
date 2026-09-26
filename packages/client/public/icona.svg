@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#05070f"/>
+      <stop offset="1" stop-color="#1f2a5c"/>
+    </linearGradient>
+    <radialGradient id="luna" cx="0.42" cy="0.38">
+      <stop offset="0" stop-color="#fbfaf3"/>
+      <stop offset="0.75" stop-color="#d6dcea"/>
+      <stop offset="1" stop-color="#aab3c8"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#cielo)"/>
+  <circle cx="100" cy="92" r="58" fill="url(#luna)"/>
+  <circle cx="80" cy="72" r="7" fill="#8f98ae" opacity="0.18"/>
+  <circle cx="122" cy="106" r="10" fill="#8f98ae" opacity="0.15"/>
+  <path d="M0 200 V168 Q50 158 100 162 T200 160 V200 Z" fill="#04060d"/>
+  <path d="M112 166 L107 144 L103 166 L84 166 Q86 160 92 158 L94 122 Q93 100 97 84 Q95 68 90 57 L80 48 L87 45 L77 35 Q84 36 90 41 L100 52 Q107 59 113 62 L115 51 L120 65 Q129 80 133 98 Q140 118 141 138 Q149 154 158 149 Q164 145 161 139 Q171 147 165 159 Q157 169 139 167 Z" fill="#070914"/>
+  <circle cx="100" cy="58" r="1.8" fill="#ff4a3d"/>
+</svg>
